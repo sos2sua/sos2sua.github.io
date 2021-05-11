@@ -1,16 +1,39 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <head title="iME">
+        <meta name="viewport" content="height=device-height,width=device-width, initial-scale=1.0">
         <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+
+        <!-- Compiled and minified JavaScript -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+
+        <script data-name="BMC-Widget" data-cfasync="false" src="https://cdnjs.buymeacoffee.com/1.0.0/widget.prod.min.js" data-id="sos2sua" data-description="Support me on Buy me a coffee!" data-message="if it helps, cheers!" data-color="#FFDD00" data-position="Right" data-x_margin="18" data-y_margin="18"></script>
     </head>
     <body>
 
-        <h2>Simple Media Editor</h2>
-        <div class="w3-container">
-            <p>
-                <button class="w3-button w3-round-large w3-red" onclick="location.href='doodle.html';">Doodle</button>
-            </p>
+        <div class="container" style="width: 100%;">
+            <h2>iMedia Editor</h2>
+            <div class="row" style="align-items: center;">
+                <div class="col s4">
+                    <button class="w3-button w3-round-large w3-black" onclick="location.href='pages/doodle.html';" style="width: 100%;">
+                        <image src="icons/draw.png" style="width: 100%;"></image>
+                    </button>
+                    <p style="width: 100%;text-align: center;">Doodle to Art</p>
+                </div>
+                <div class="col s4">
+                    <button class="w3-button w3-round-large w3-black" onclick="location.href='pages/pictures.html';" style="width: 100%;">
+                        <image src="icons/image.png" style="width: 100%;"></image>
+                    </button>
+                    <p style="width: 100%;text-align: center;">Edit Pictures</p>
+                </div>
+                <div class="col s4">
+                    <button class="w3-button w3-round-large w3-black" onclick="location.href='pages/videos.html';" style="width: 100%;">
+                        <image src="icons/video.png" style="width: 100%;"></image>
+                    </button>
+                    <p style="width: 100%;text-align: center;">Video Processing</p>
+                </div>
+              </div>
         </div>
 
     </body>
