@@ -1,11 +1,13 @@
 // PLUGIN BELOW
 (function($) {
     var opts = null;
-    var context;
+    var contexts=[];
     var running=false;
     $.fn.redraw = function(){
-        context.beginPath();
-        context.stroke();
+        contexts.forEach(context => {
+            context.beginPath();
+            context.stroke();
+        });
 	}
 	$.fn.setColor = function(color,size){
         opts.color = color;
@@ -19,7 +21,9 @@
             //start functionality
             container = $(this).parent();
             canvas = this;
-            context = this.getContext('2d');
+            // context = this.getContext('2d');
+            contexts.push(this.getContext('2d'))
+            
             canvas.style.cursor = 'crosshair';
             $(this).attr("width",opts.screenWidth).attr("height",opts.screenHeight);
             painters = [];
@@ -34,7 +38,6 @@
             // onWindowResize(null);
 		});
         function init() {
-            context = context;
             mouseX = opts.screenWidth / 2;
             mouseY = opts.screenHeight / 2;
             for(var i = 0; i < opts.strokes; i++) {
@@ -49,7 +52,7 @@
                 });
             }
 		}
-		function update() {
+		function update(context) {
 			var i;
 			context.lineWidth = opts.brushSize;
 			context.strokeStyle = "rgba(" + opts.color[0] + ", " + opts.color[1] + ", " + opts.color[2] + ", " + opts.brushPressure + ")";
@@ -84,7 +87,6 @@
         }
         function strokestart(event) {
 			if(!running){
-				// this.interval = setInterval(update, opts.refreshRate);
 				running=true;
 			}
 			var newCord = getMousePos(canvas,event);
@@ -110,7 +112,10 @@
 			var newCord = getMousePos(canvas,event);
 			mouseX = newCord.x;
 			mouseY = newCord.y;
-			update();
+            
+            id=parseInt(event.target.id.substring(5))
+            
+			update(contexts[id]);
         }
         // function onWindowResize() {
         //     opts.screenWidth = window.innerWidth;

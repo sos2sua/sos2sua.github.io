@@ -12,22 +12,31 @@
 
         <script>
             $(function(){
-                $("#bgcanvas").ribbon();
-                $('#bgcanvas').setColor([255, 255, 255],2);
-                displaySetColor('rgb(228, 224, 224)');
-                resetDoodle();
+                for(i=0;i<6;i++){
+                    $("#board"+i).ribbon();
+                    $('#board'+i).setColor([255, 255, 255],2);
+                    displaySetColor("board"+i,'rgb(228, 224, 224)');
+                    resetDoodle("board"+i);
+                }
             });
-            function displaySetColor(color){
-                document.getElementById("bgcanvas").style.borderBottomColor=color;
+            function displaySetColor(id, color){
+                document.getElementById(id).style.borderBottomColor=color;
             }
-            function saveDoodle(){
-                var canvas = document.getElementById("bgcanvas");
+            function saveAllDoodle(i){
+                if (i>=6) return;
+                saveDoodle("board"+i);
+                i+=1;
+                setTimeout(saveAllDoodle, 200,i);
+            }
+            function saveDoodle(id){
+                
+                var canvas = document.getElementById(id);
                 var image = canvas.toDataURL("image/png").replace("image/png", "image/octet-stream");  // here is the most important part because if you dont replace you will get a DOM 18 exception.
                 // window.location.href=image; 
 
                 var element = document.createElement('a');
                 element.setAttribute('href', image);
-                element.setAttribute('download', "filename.png");
+                element.setAttribute('download', id+".png");
 
                 element.style.display = 'none';
                 document.body.appendChild(element);
@@ -36,13 +45,47 @@
 
                 document.body.removeChild(element);
             }
-            function resetDoodle(){
-                var canvas = document.getElementById("bgcanvas");
+            function resetAllDoodle(){
+                let sure = confirm("Are you the sure, you want to reset all the boards?");
+                if(sure){
+                    for(i=0;i<6;i++){
+                        resetDoodle("board"+i);
+                    }
+                }
+            }
+            function resetDoodle(id){
+                var canvas = document.getElementById(id);
                 var ctx = canvas.getContext("2d");
                 ctx.fillStyle = "rgba(0, 0, 0, 1)";
                 ctx.fillRect(0, 0, canvas.width, canvas.height);
             }
+            function setColor(colorArr, stroke, colorRGB){
+                for(i=0;i<6;i++){
+                    $("#board"+i).setColor(colorArr, stroke);
+                    displaySetColor("board"+i,colorRGB);
+                }
+            }
         </script>
+
+        <style>
+            div.scrollmenu {
+            background-color: #333;
+            overflow: auto;
+            white-space: nowrap;
+            }
+            
+            div.scrollmenu a {
+            display: inline-block;
+            color: white;
+            text-align: center;
+            padding: 14px;
+            text-decoration: none;
+            }
+            
+            div.scrollmenu a:hover {
+            background-color: #777;
+            }
+        </style>
 
         <script data-name="BMC-Widget" data-cfasync="false" src="https://cdnjs.buymeacoffee.com/1.0.0/widget.prod.min.js" data-id="sos2sua" data-description="Support me on Buy me a coffee!" data-message="if it helps, cheers!" data-color="#FFDD00" data-position="Right" data-x_margin="18" data-y_margin="18"></script>
             
@@ -55,7 +98,7 @@
                 </div>
                 
                 <div class="col s2" style="padding: 1vw;display: flex;justify-content: center;align-items: center;">
-                    <image src="../icons/save.png" style="width: 35px;" onclick="saveDoodle()" ></image>
+                    <image src="../icons/save.png" style="width: 35px;" onclick="saveAllDoodle(0)" ></image>
                 </div>
                 <div class="col s2" style="padding: 1vw;display: flex;justify-content: center;align-items: center;">
                     <!-- <image src="../icons/undo.png" style="width: 35px;"></image> -->
@@ -64,7 +107,7 @@
                     <!-- <image src="../icons/redo.png" style="width: 35px;"></image> -->
                 </div>
                 <div class="col s2" style="padding: 1vw;display: flex;justify-content: center;align-items: center;">
-                    <image src="../icons/reset.png" style="width: 35px;" onclick="resetDoodle()"></image>
+                    <image src="../icons/reset.png" style="width: 35px;" onclick="resetAllDoodle()"></image>
                 </div>
                 <!-- <div class="col s1" style="display: flex;justify-content: center;align-items: center;"></div> -->
                 <div class="col s2" style="padding: 2vw;display: flex;justify-content: center;align-items: center;">             
@@ -73,49 +116,54 @@
             </div>
             <div class="row" style="align-items: center;height: 100%;">
                 <div class="col s1" style="height: 80%;">
-                    <div class="row" style="align-content: center; margin-bottom: 0;">
+                    <div class="row" style="align-content: center; margin-bottom: 1vw;">
                         <div class="col s12" style="display: flex;justify-content: center;align-items: center;">
-                            <button onclick="$('#bgcanvas').setColor([238, 70, 70],2);displaySetColor('rgb(238, 70, 70)');" class="w3-button w3-xlarge w3-circle" style="background-color: rgb(238, 70, 70);">o</button>
+                            <button onclick="setColor([238, 70, 70],2,'rgb(238, 70, 70)')" class="w3-button w3-medium w3-circle" style="background-color: rgb(238, 70, 70);">r</button>
                         </div>
                     </div>
-                    <div class="row" style="align-content: center; margin-bottom: 0;">
+                    <div class="row" style="align-content: center; margin-bottom: 1vw;">
                         <div class="col s12" style="display: flex;justify-content: center;align-items: center;">
-                            <button onclick="$('#bgcanvas').setColor([245, 233, 62],2);displaySetColor('rgb(245, 233, 62)');" class="w3-button w3-xlarge w3-circle" style="background-color: rgb(245, 233, 62);">o</button>
+                            <button onclick="setColor([245, 233, 62],2,'rgb(245, 233, 62)')" class="w3-button w3-medium w3-circle" style="background-color: rgb(245, 233, 62);">y</button>
                         </div>
                     </div>
-                    <div class="row" style="align-content: center; margin-bottom: 0;">
+                    <div class="row" style="align-content: center; margin-bottom: 1vw;">
                         <div class="col s12" style="display: flex;justify-content: center;align-items: center;">
-                            <button onclick="$('#bgcanvas').setColor([106, 228, 69],2);displaySetColor('rgb(106, 228, 69)');" class="w3-button w3-xlarge w3-circle" style="background-color: rgb(106, 228, 69);">o</button>
+                            <button onclick="setColor([106, 228, 69],2,'rgb(106, 228, 69)')" class="w3-button w3-medium w3-circle" style="background-color: rgb(106, 228, 69);">g</button>
                         </div>
                     </div>
-                    <div class="row" style="align-content: center; margin-bottom: 0;">
+                    <div class="row" style="align-content: center; margin-bottom: 1vw;">
                         <div class="col s12" style="display: flex;justify-content: center;align-items: center;">
-                            <button onclick="$('#bgcanvas').setColor([79, 224, 230],2);displaySetColor('rgb(79, 224, 230)');" class="w3-button w3-xlarge w3-circle" style="background-color: rgb(79, 224, 230);">o</button>
+                            <button onclick="setColor([79, 224, 230],2,'rgb(79, 224, 230)')" class="w3-button w3-medium w3-circle" style="background-color: rgb(79, 224, 230);">c</button>
                         </div>
                     </div>
-                    <div class="row" style="align-content: center; margin-bottom: 0;">
+                    <div class="row" style="align-content: center; margin-bottom: 1vw;">
                         <div class="col s12" style="display: flex;justify-content: center;align-items: center;">
-                            <button onclick="$('#bgcanvas').setColor([71, 93, 218],2);displaySetColor('rgb(71, 93, 218)');" class="w3-button w3-xlarge w3-circle" style="background-color: rgb(71, 93, 218);">o</button>
+                            <button onclick="setColor([71, 93, 218],2,'rgb(71, 93, 218)')" class="w3-button w3-medium w3-circle" style="background-color: rgb(71, 93, 218);">b</button>
                         </div>
                     </div>
-                    <div class="row" style="align-content: center; margin-bottom: 0;">
+                    <div class="row" style="align-content: center; margin-bottom: 1vw;">
                         <div class="col s12" style="display: flex;justify-content: center;align-items: center;">
-                            <button onclick="$('#bgcanvas').setColor([193, 67, 197],2);displaySetColor('rgb(193, 67, 197)');" class="w3-button w3-xlarge w3-circle" style="background-color: rgb(193, 67, 197);">o</button>
+                            <button onclick="setColor([193, 67, 197],2,'rgb(193, 67, 197)')" class="w3-button w3-medium w3-circle" style="background-color: rgb(193, 67, 197);">p</button>
                         </div>
                     </div>
-                    <div class="row" style="align-content: center; margin-bottom: 0;">
+                    <div class="row" style="align-content: center; margin-bottom: 1vw;">
                         <div class="col s12" style="display: flex;justify-content: center;align-items: center;">
-                            <button onclick="$('#bgcanvas').setColor([255, 255, 255],2);displaySetColor('rgb(228, 224, 224)');" class="w3-button w3-xlarge w3-circle" style="background-color: rgb(228, 224, 224);">o</button>
+                            <button onclick="setColor([255, 255, 255],2,'rgb(228, 224, 224)')" class="w3-button w3-medium w3-circle" style="background-color: rgb(228, 224, 224);">w</button>
                         </div>
                     </div>
-                    <div class="row" style="align-content: center; margin-bottom: 0;">
+                    <div class="row" style="align-content: center; margin-bottom: 1vw;">
                         <div class="col s12" style="display: flex;justify-content: center;align-items: center;">
-                            <button onclick="$('#bgcanvas').setColor([0, 0, 0],50);displaySetColor('rgb(0, 0, 0)');" class="w3-button w3-round-large" style="background-color: rgb(0, 0, 0);">o</button>
+                            <button onclick="setColor([0, 0, 0],50,'rgb(0, 0, 0)')" class="w3-button w3-round-large" style="background-color: rgb(0, 0, 0);">o</button>
                         </div>
                     </div>
                 </div>
-                <div class="col s11" style="height: 80%;">
-                    <Canvas id='bgcanvas' class="w3-round-large" style="background-color: black; width: 100%;height: 100%;border-bottom: 6px solid black;"></Canvas>
+                <div class="col s11 scrollmenu w3-round-large" style="height: 80%;">
+                    <Canvas id='board0' class="w3-round-large" style="background-color: black; width: 100%;height: 100%;border-bottom: 6px solid black;"></Canvas>
+                    <Canvas id='board1' class="w3-round-large" style="background-color: black; width: 100%;height: 100%;border-bottom: 6px solid black;"></Canvas>
+                    <Canvas id='board2' class="w3-round-large" style="background-color: black; width: 100%;height: 100%;border-bottom: 6px solid black;"></Canvas>
+                    <Canvas id='board3' class="w3-round-large" style="background-color: black; width: 100%;height: 100%;border-bottom: 6px solid black;"></Canvas>
+                    <Canvas id='board4' class="w3-round-large" style="background-color: black; width: 100%;height: 100%;border-bottom: 6px solid black;"></Canvas>
+                    <Canvas id='board5' class="w3-round-large" style="background-color: black; width: 100%;height: 100%;border-bottom: 6px solid black;"></Canvas>
                 </div>
             </div>
         </div>
