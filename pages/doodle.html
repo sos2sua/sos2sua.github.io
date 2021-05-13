@@ -93,33 +93,65 @@
             div.scrollmenu a:hover {
             background-color: #777;
             }
+
+            .tooltip {
+            position: relative;
+            display: inline-block;
+            /* border-bottom: 1px dotted black; */
+            }
+
+            .tooltip .tooltiptext {
+            visibility: hidden;
+            width: 120px;
+            background-color: black;
+            color: #fff;
+            text-align: center;
+            border-radius: 6px;
+            padding: 5px 0;
+            /* Position the tooltip */
+            position: absolute;
+            z-index: 1;
+            top: 100%;
+            left: 50%;
+            margin-left: -60px;
+            }
+
+            .tooltip:hover .tooltiptext {
+            visibility: visible;
+            }
         </style>
 
         <script data-name="BMC-Widget" data-cfasync="false" src="https://cdnjs.buymeacoffee.com/1.0.0/widget.prod.min.js" data-id="sos2sua" data-description="Support me on Buy me a coffee!" data-message="if it helps, cheers!" data-color="#FFDD00" data-position="Right" data-x_margin="18" data-y_margin="18"></script>
             
     </head>
-    <body style="height: 100%;min-height: 100%;">
+    <body style="height: 100%;min-height: 100%;text-align:center;">
         <div class="container" style="width: 100%;height: 100%;margin: 0;max-width: 100%;">
             <div class="row" style="align-items: center;margin: 0;padding: 0;">
-                <div class="col s2" style="padding: 1vw;">
+                <div class="col s2 tooltip" style="padding: 1vw;">
                     <image src="../icons/back.png" onclick="location.href='../index.html';" style="width: 35px;"></image>
+                    <span class="tooltiptext">back to Main Menu</span>
                 </div>
                 
-                <div class="col s2" style="padding: 1vw;display: flex;justify-content: center;align-items: center;">
+                <div class="col s2 tooltip" style="padding: 1vw;display: flex;justify-content: center;align-items: center;">
                     <image src="../icons/save.png" style="width: 35px;" onclick="saveAllDoodle(0)" ></image>
+                    <span class="tooltiptext">save all boards</span>
                 </div>
-                <div class="col s2" style="padding: 1vw;display: flex;justify-content: center;align-items: center;">
-                    <image onclick="scrollL()" src="../icons/swipeL.png" style="width: 55px;"></image>
+                <div onclick="scrollL()" class="col s2" style="padding: 1vw;display: flex;justify-content: center;align-items: center;">
+                    go left
+                    <image src="../icons/swipeL.png" style="width: 25px;"></image>
                 </div>
-                <div class="col s2" style="padding: 1vw;display: flex;justify-content: center;align-items: center;">
-                    <image onclick="scrollR()" src="../icons/swipeR.png" style="width: 55px;"></image>
+                <div onclick="scrollR()" class="col s2" style="padding: 1vw;display: flex;justify-content: center;align-items: center;">
+                    <image src="../icons/swipeR.png" style="width: 25px;"></image>
+                    go right
                 </div>
-                <div class="col s2" style="padding: 1vw;display: flex;justify-content: center;align-items: center;">
+                <div class="col s2 tooltip" style="padding: 1vw;display: flex;justify-content: center;align-items: center;">
                     <image src="../icons/reset.png" style="width: 35px;" onclick="resetAllDoodle()"></image>
+                    <span class="tooltiptext">reset</span>
                 </div>
                 <!-- <div class="col s1" style="display: flex;justify-content: center;align-items: center;"></div> -->
-                <div class="col s2" style="padding: 2vw;display: flex;justify-content: center;align-items: center;">             
+                <div class="col s2 tooltip" style="padding: 2vw;display: flex;justify-content: center;align-items: center;">             
                     <image src="../icons/draw.png" style="width: 55px;"></image>
+                    <span class="tooltiptext">Version 0.1</span>
                 </div>
             </div>
             <div class="row" style="align-items: center;height: 100%;">
@@ -160,14 +192,19 @@
                         </div>
                     </div>
                     <div class="row" style="align-content: center; margin-bottom: 1vw;">
-                        <div class="col s12" style="display: flex;justify-content: center;align-items: center;">
-                            <button onclick="setColor([0, 0, 0],50,'rgb(0, 0, 0)')" class="w3-button w3-round-large" style="background-color: rgb(0, 0, 0);">o</button>
+                        <div class="col s12 tooltip" style="display: flex;justify-content: center;align-items: center;">
+                            <button onclick="setColor([0, 0, 0],50,'rgb(0, 0, 0)')" class="w3-button w3-round-large" style="background-color: rgb(0, 0, 0);">er</button>
+                            <span class="tooltiptext">select eraser</span>
                         </div>
                     </div>
                 </div>
                 <div id="boardContainer" class="col s11 scrollmenu w3-round-large" style="height: 80%;">
-                    <Canvas id='board0' class="w3-round-large" style="background-color: black; width: 100%;height: 100%;border-bottom: 6px solid black;"></Canvas>
-                    <Canvas id='board1' class="w3-round-large" style="background-color: black; width: 100%;height: 100%;border-bottom: 6px solid black;"></Canvas>
+                    <Canvas id='board0' class="w3-round-large tooltip" style="background-color: black; width: 100%;height: 100%;border-bottom: 6px solid black;">
+                        <span class="tooltiptext">select eraser</span>
+                    </Canvas>
+                    <Canvas id='board1' class="w3-round-large tooltip" style="background-color: black; width: 100%;height: 100%;border-bottom: 6px solid black;">
+                        <span class="tooltiptext">select eraser</span>
+                    </Canvas>
                     <Canvas id='board2' class="w3-round-large" style="background-color: black; width: 100%;height: 100%;border-bottom: 6px solid black;"></Canvas>
                     <Canvas id='board3' class="w3-round-large" style="background-color: black; width: 100%;height: 100%;border-bottom: 6px solid black;"></Canvas>
                     <Canvas id='board4' class="w3-round-large" style="background-color: black; width: 100%;height: 100%;border-bottom: 6px solid black;"></Canvas>
