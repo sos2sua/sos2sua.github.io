@@ -55,7 +55,13 @@
 		function update(context) {
 			var i;
 			context.lineWidth = opts.brushSize;
+            if (!(opts.color[0] == 0 && opts.color[0] == 0 && opts.color[0] == 0)){
+                context.globalAlpha = 0.05;
+            }else{
+                context.globalAlpha = 1;
+            }
 			context.strokeStyle = "rgba(" + opts.color[0] + ", " + opts.color[1] + ", " + opts.color[2] + ", " + opts.brushPressure + ")";
+
 			for( i = 0; i < painters.length; i++) {
 				context.beginPath();
 				var dx = painters[i].dx;
@@ -160,10 +166,10 @@
         screenHeight : $(window).height(),
         duration : 6000, // how long to keep the line there
         fadesteps : 10, // how many steps to fade the lines out by, reduce to optimize
-        strokes : 20, // how many strokes to draw
+        strokes : 15, // how many strokes to draw
         refreshRate : 30, // set this higher if performace is an issue directly affects easing
         easing : 0.7, // kind of "how loopy" higher= bigger loops
-        brushSize : 2, // pixel width
+        brushSize : 4, // pixel width
         brushPressure : 1, // 1 by default but originally variable setting from wacom and touch device sensitivity
         color : [0, 50, 0], // color val RGB 0-255, 0-255, 0-255
         backgroundColor : [255, 255, 255], // color val RGB 0-255, 0-255, 0-25
