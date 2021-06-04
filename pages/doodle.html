@@ -14,7 +14,7 @@
             $(function(){
                 for(i=0;i<6;i++){
                     $("#board"+i).ribbon();
-                    $('#board'+i).setColor([255, 255, 255],6);
+                    $('#board'+i).setColor([255, 255, 255],3);
                     displaySetColor("board"+i,'rgb(228, 224, 224)');
                     resetDoodle("board"+i);
                 }
@@ -56,6 +56,7 @@
             function resetDoodle(id){
                 var canvas = document.getElementById(id);
                 var ctx = canvas.getContext("2d");
+                ctx.globalAlpha = 1;
                 ctx.fillStyle = "rgba(0, 0, 0, 1)";
                 ctx.fillRect(0, 0, canvas.width, canvas.height);
             }
@@ -148,50 +149,74 @@
                     <image src="../icons/reset.png" style="width: 35px;" onclick="resetAllDoodle()"></image>
                     <span class="tooltiptext">reset</span>
                 </div>
-                <!-- <div class="col s1" style="display: flex;justify-content: center;align-items: center;"></div> -->
                 <div class="col s2 tooltip" style="padding: 2vw;display: flex;justify-content: center;align-items: center;">             
                     <image src="../icons/draw.png" style="width: 55px;"></image>
-                    <span class="tooltiptext">Version 0.1</span>
+                    <span class="tooltiptext">Version 0.3</span>
                 </div>
             </div>
             <div class="row" style="align-items: center;height: 100%;">
                 <div class="col s1" style="height: 80%;">
-                    <div class="row" style="align-content: center; margin-bottom: 1vw;">
+                    <div class="row" style="align-content: center; margin-bottom: 0.1vw;">
                         <div class="col s12" style="display: flex;justify-content: center;align-items: center;">
-                            <button onclick="setColor([238, 70, 70],6,'rgb(238, 70, 70)')" class="w3-button w3-medium w3-circle" style="background-color: rgb(238, 70, 70);">r</button>
+                            <button onclick="setColor([255, 0, 0],3,'rgb(255, 0, 0)')" class="w3-button w3-round-large" style="background-color: rgb(255, 0, 0);">r</button>
+                        </div>
+                    </div>
+                    <div class="row" style="align-content: center; margin-bottom: 0.1vw;">
+                        <div class="col s12" style="display: flex;justify-content: center;align-items: center;">
+                            <button onclick="setColor([255, 128, 0],3,'rgb(255, 128, 0)')" class="w3-button w3-round-large" style="background-color: rgb(255, 128, 0);">o</button>
+                        </div>
+                    </div>
+                    <div class="row" style="align-content: center; margin-bottom: 0.1vw;">
+                        <div class="col s12" style="display: flex;justify-content: center;align-items: center;">
+                            <button onclick="setColor([255, 255, 0],3,'rgb(255, 255, 0)')" class="w3-button w3-round-large" style="background-color: rgb(255, 255, 0);">y</button>
+                        </div>
+                    </div>
+                    <div class="row" style="align-content: center; margin-bottom: 0.1vw;">
+                        <div class="col s12" style="display: flex;justify-content: center;align-items: center;">
+                            <button onclick="setColor([128, 255, 0],3,'rgb(128, 255, 0)')" class="w3-button w3-round-large" style="background-color: rgb(128, 255, 0);">g</button>
+                        </div>
+                    </div>
+                    <div class="row" style="align-content: center; margin-bottom: 0.1vw;">
+                        <div class="col s12" style="display: flex;justify-content: center;align-items: center;">
+                            <button onclick="setColor([0, 255, 128],3,'rgb(0, 255, 128)')" class="w3-button w3-round-large" style="background-color: rgb(0, 255, 128);">g</button>
+                        </div>
+                    </div>
+                    <div class="row" style="align-content: center; margin-bottom: 0.1vw;">
+                        <div class="col s12" style="display: flex;justify-content: center;align-items: center;">
+                            <button onclick="setColor([0, 255, 255],3,'rgb(0, 255, 255)')" class="w3-button w3-round-large" style="background-color: rgb(0, 255, 255);">b</button>
+                        </div>
+                    </div>
+                    <div class="row" style="align-content: center; margin-bottom: 0.1vw;">
+                        <div class="col s12" style="display: flex;justify-content: center;align-items: center;">
+                            <button onclick="setColor([0, 128, 255],3,'rgb(0, 128, 255)')" class="w3-button w3-round-large" style="background-color: rgb(0, 128, 255);">b</button>
+                        </div>
+                    </div>
+                    <div class="row" style="align-content: center; margin-bottom: 0.1vw;">
+                        <div class="col s12" style="display: flex;justify-content: center;align-items: center;">
+                            <button onclick="setColor([0, 0, 255],3,'rgb(0, 0, 255)')" class="w3-button w3-round-large" style="background-color: rgb(0, 0, 255);">b</button>
+                        </div>
+                    </div>
+                    <div class="row" style="align-content: center; margin-bottom: 0.1vw;">
+                        <div class="col s12" style="display: flex;justify-content: center;align-items: center;">
+                            <button onclick="setColor([127, 0, 255],3,'rgb(127, 0, 255)')" class="w3-button w3-round-large" style="background-color: rgb(127, 0, 255);">b</button>
+                        </div>
+                    </div>
+                    <div class="row" style="align-content: center; margin-bottom: 0.1vw;">
+                        <div class="col s12" style="display: flex;justify-content: center;align-items: center;">
+                            <button onclick="setColor([255, 0, 255],3,'rgb(255, 0, 255)')" class="w3-button w3-round-large" style="background-color: rgb(255, 0, 255);">r</button>
+                        </div>
+                    </div>
+                    <div class="row" style="align-content: center; margin-bottom: 0.1vw;">
+                        <div class="col s12" style="display: flex;justify-content: center;align-items: center;">
+                            <button onclick="setColor([255, 0, 127],3,'rgb(255, 0, 127)')" class="w3-button w3-round-large" style="background-color: rgb(255, 0, 127);">r</button>
                         </div>
                     </div>
                     <div class="row" style="align-content: center; margin-bottom: 1vw;">
                         <div class="col s12" style="display: flex;justify-content: center;align-items: center;">
-                            <button onclick="setColor([245, 233, 62],6,'rgb(245, 233, 62)')" class="w3-button w3-medium w3-circle" style="background-color: rgb(245, 233, 62);">y</button>
+                            <button onclick="setColor([255, 255, 255],3,'rgb(255, 255, 255)')" class="w3-button w3-round-large" style="background-color: rgb(224, 224, 224);">w</button>
                         </div>
                     </div>
-                    <div class="row" style="align-content: center; margin-bottom: 1vw;">
-                        <div class="col s12" style="display: flex;justify-content: center;align-items: center;">
-                            <button onclick="setColor([106, 228, 69],6,'rgb(106, 228, 69)')" class="w3-button w3-medium w3-circle" style="background-color: rgb(106, 228, 69);">g</button>
-                        </div>
-                    </div>
-                    <div class="row" style="align-content: center; margin-bottom: 1vw;">
-                        <div class="col s12" style="display: flex;justify-content: center;align-items: center;">
-                            <button onclick="setColor([79, 224, 230],6,'rgb(79, 224, 230)')" class="w3-button w3-medium w3-circle" style="background-color: rgb(79, 224, 230);">c</button>
-                        </div>
-                    </div>
-                    <div class="row" style="align-content: center; margin-bottom: 1vw;">
-                        <div class="col s12" style="display: flex;justify-content: center;align-items: center;">
-                            <button onclick="setColor([71, 93, 218],2,'rgb(71, 93, 218)')" class="w3-button w3-medium w3-circle" style="background-color: rgb(71, 93, 218);">b</button>
-                        </div>
-                    </div>
-                    <div class="row" style="align-content: center; margin-bottom: 1vw;">
-                        <div class="col s12" style="display: flex;justify-content: center;align-items: center;">
-                            <button onclick="setColor([193, 67, 197],2,'rgb(193, 67, 197)')" class="w3-button w3-medium w3-circle" style="background-color: rgb(193, 67, 197);">p</button>
-                        </div>
-                    </div>
-                    <div class="row" style="align-content: center; margin-bottom: 1vw;">
-                        <div class="col s12" style="display: flex;justify-content: center;align-items: center;">
-                            <button onclick="setColor([255, 255, 255],2,'rgb(228, 224, 224)')" class="w3-button w3-medium w3-circle" style="background-color: rgb(228, 224, 224);">w</button>
-                        </div>
-                    </div>
-                    <div class="row" style="align-content: center; margin-bottom: 1vw;">
+                    <div class="row" style="align-content: center; margin-bottom: 0.1vw;">
                         <div class="col s12 tooltip" style="display: flex;justify-content: center;align-items: center;">
                             <button onclick="setColor([0, 0, 0],50,'rgb(0, 0, 0)')" class="w3-button w3-round-large" style="background-color: rgb(0, 0, 0);">er</button>
                             <span class="tooltiptext">select eraser</span>

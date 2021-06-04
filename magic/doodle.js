@@ -55,7 +55,7 @@
 		function update(context) {
 			var i;
 			context.lineWidth = opts.brushSize;
-            if (!(opts.color[0] == 0 && opts.color[0] == 0 && opts.color[0] == 0)){
+            if (!(opts.color[0] == 0 && opts.color[1] == 0 && opts.color[2] == 0)){
                 context.globalAlpha = 0.05;
             }else{
                 context.globalAlpha = 1;
